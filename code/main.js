@@ -1,4 +1,3 @@
-
 import kaboom from "kaboom"
 
 // initialize context
@@ -20,17 +19,24 @@ loadSprite("cofee", "sprites/cofee.png");
 loadSound("Background", "sounds/Background.mp3");
 loadSound("sip", "sounds/sip.mp3");
 loadSound("score", "sounds/score.mp3");
-loadSound("harry harry", "sounds/harry harry.mp3");
 loadSound("gameover", "sounds/gameover.mp3");
+scene("game", () => {
 
-//Adding player
-const player = add([
+	// add coder character to screen
+	const player = add([
     sprite("coder1"), // renders as a sprite
-    health(3),
     pos(120, 80), // position in world
-    scale(0.13),
+   scale(0.13),
     area(),          // has a collider
-])
+    ])
+//Adding player
+// const player = add([
+//     sprite("coder1"), // renders as a sprite
+//     health(3),
+//     pos(120, 80), // position in world
+//     scale(0.13),
+//     area(),          // has a collider
+// ])
 //Defining game constants
 let SPEED=650;
 let BSPEED=1;
@@ -122,19 +128,6 @@ loop(4,()=>{
     })
   }
 })
-player.onCollide("bug",()=>
-  {
-    play("gameover");
-    destroy(player);
-    addKaboom(player.pos);
-    scoreText = add([
-      text("Game Over Restart to play Again"),
-      scale(5),
-      pos(width() / 2, height() / 2 + 80),
-      color(10, 10, 255),
-      origin("center")
-  ])
-  })
 player.onCollide("coffee",(cof)=>
   {
     backgroundMusic.volume(0.1);
@@ -148,6 +141,29 @@ player.onCollide("coffee",(cof)=>
       backgroundMusic.volume(0.2)
   })
   })
-
+ //On Collide
+player.onCollide("bug",()=>
+  {
+    play("gameover");
+    destroy(player);
+    addKaboom(player.pos);
+    scoreText = add([
+      text("Game Over Restart to play Again,Rest a Min! to score higher"),
+      scale(3),
+      pos(width() / 2, height() / 2 + 80),
+      color(10, 10, 255),
+      origin("center")
+  ])
+    const play_again_btn = add([
+        text("Try Again!"),
+        pos(width() / 2, height() / 2 + 240),
+		scale(2),
+        area({ cursor: "pointer", }),
+		origin("center"),
+    ])
+    play_again_btn.onClick(() => go("game"))
+})
 
 displayScore()
+});
+go("game");
