@@ -2915,7 +2915,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   // code/main.js
   no({
     font: "sink",
-    background: [0, 56, 0]
+    background: [0, 173, 181]
   });
   loadSprite("coder1", "sprites/coder1.png");
   loadSprite("bug", "sprites/bug.png");

@@ -5,7 +5,7 @@ import kaboom from "kaboom"
 kaboom(
   {
     font:"sink",
-    background:[0,56,0],
+    background:[0, 173, 181],
   }
 )
 
