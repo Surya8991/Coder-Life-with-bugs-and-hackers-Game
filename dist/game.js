@@ -2921,11 +2921,21 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
   loadSprite("bug", "sprites/bug.png");
   loadSprite("hacker", "sprites/hacker.jpg");
   loadSprite("cofee", "sprites/cofee.png");
+  loadSound("bg", "sounds/bg.mp3");
   loadSound("Background", "sounds/Background.mp3");
   loadSound("sip", "sounds/sip.mp3");
   loadSound("score", "sounds/score.mp3");
   loadSound("gameover", "sounds/gameover.mp3");
+  var displayhandle = /* @__PURE__ */ __name(() => {
+    handles = add([
+      text(" Start:Click on the Screen  | UP \u2191 | DOWN \u2193 | LEFT| RIGHT"),
+      scale(3),
+      color(0, 64, 255),
+      pos(200, 20)
+    ]);
+  }, "displayhandle");
   scene("game", () => {
+    displayhandle();
     const player = add([
       sprite("coder1"),
       pos(120, 80),
@@ -2949,7 +2959,7 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }, "displayScore");
     const playBg = /* @__PURE__ */ __name(() => {
       if (!bg) {
-        backgroundMusic = play("Background", { volume: 0.5 });
+        backgroundMusic = play("bg", { volume: 0.4 });
         bg = true;
       }
     }, "playBg");
@@ -3030,8 +3040,8 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       destroy(player);
       addKaboom(player.pos);
       scoreText = add([
-        text("Game Over Restart to play Again,Rest a Min! to score higher"),
-        scale(3),
+        text("Game Over Restart to play Again"),
+        scale(5),
         pos(width() / 2, height() / 2 + 80),
         color(10, 10, 255),
         origin("center")

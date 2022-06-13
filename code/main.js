@@ -16,13 +16,23 @@ loadSprite("cofee", "sprites/cofee.png");
 
 
 //load sounds
+loadSound("bg", "sounds/bg.mp3");
 loadSound("Background", "sounds/Background.mp3");
 loadSound("sip", "sounds/sip.mp3");
 loadSound("score", "sounds/score.mp3");
 loadSound("gameover", "sounds/gameover.mp3");
+const displayhandle = ()=>{
+  handles = add([
+text(" Start:Click on the Screen  | UP ↑ | DOWN ↓ | LEFT| RIGHT"),
+      scale(3),
+      color(0,64,255),
+    pos(200, 20),
+    
+])
+}
 scene("game", () => {
-
 	// add coder character to screen
+  displayhandle();
 	const player = add([
     sprite("coder1"), // renders as a sprite
     pos(120, 80), // position in world
@@ -59,7 +69,7 @@ const playBg = ()=>
   {
     if(!bg)
     {
-      backgroundMusic=play("Background",{volume:0.5})
+      backgroundMusic=play("bg",{volume:0.4})
       bg=true;
     }
   }
@@ -148,8 +158,8 @@ player.onCollide("bug",()=>
     destroy(player);
     addKaboom(player.pos);
     scoreText = add([
-      text("Game Over Restart to play Again,Rest a Min! to score higher"),
-      scale(3),
+      text("Game Over Restart to play Again"),
+      scale(5),
       pos(width() / 2, height() / 2 + 80),
       color(10, 10, 255),
       origin("center")
