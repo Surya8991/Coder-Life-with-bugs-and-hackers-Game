@@ -37,7 +37,7 @@ scene("game", () => {
     sprite("coder1"), // renders as a sprite
     pos(120, 80), // position in world
    scale(0.13),
-    area(),          // has a collider
+    area()       // has a collider
     ])
 //Adding player
 // const player = add([
@@ -69,11 +69,13 @@ const playBg = ()=>
   {
     if(!bg)
     {
-      backgroundMusic=play("bg",{volume:0.4})
+      backgroundMusic=play("bg")
       bg=true;
     }
   }
-
+onKeyPress("f", (c) => {
+    fullscreen(!isFullscreen())
+})
 
 //Movement with even Handelers
 onKeyDown("left", () => {
@@ -140,15 +142,14 @@ loop(4,()=>{
 })
 player.onCollide("coffee",(cof)=>
   {
-    backgroundMusic.volume(0.1);
+    backgroundMusic;
    play("sip", {
-    volume: 2
   });
     destroy(cof);
     SCORE += 1;
     displayScore()
     wait(3, () => {
-      backgroundMusic.volume(0.2)
+      backgroundMusic;
   })
   })
  //On Collide

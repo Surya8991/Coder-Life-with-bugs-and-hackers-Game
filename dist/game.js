@@ -2959,10 +2959,13 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
     }, "displayScore");
     const playBg = /* @__PURE__ */ __name(() => {
       if (!bg) {
-        backgroundMusic = play("bg", { volume: 0.4 });
+        backgroundMusic = play("bg");
         bg = true;
       }
     }, "playBg");
+    onKeyPress("f", (c) => {
+      fullscreen(!isFullscreen());
+    });
     onKeyDown("left", () => {
       playBg();
       player.move(-SPEED, 0);
@@ -3024,15 +3027,13 @@ vec4 frag(vec3 pos, vec2 uv, vec4 color, sampler2D tex) {
       }
     });
     player.onCollide("coffee", (cof) => {
-      backgroundMusic.volume(0.1);
-      play("sip", {
-        volume: 2
-      });
+      backgroundMusic;
+      play("sip", {});
       destroy(cof);
       SCORE += 1;
       displayScore();
       wait(3, () => {
-        backgroundMusic.volume(0.2);
+        backgroundMusic;
       });
     });
     player.onCollide("bug", () => {
